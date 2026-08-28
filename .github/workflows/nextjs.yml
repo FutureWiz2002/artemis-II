@@ -56,18 +56,10 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: |
-            ${{ env.FRONTEND_DIR }}/package-lock.json
-            ${{ env.FRONTEND_DIR }}/yarn.lock
+          cache-dependency-path: ${{ env.FRONTEND_DIR }}/package-lock.json
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
-          generator_config_file: ${{ env.FRONTEND_DIR }}/next.config.ts
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -84,6 +76,8 @@ jobs:
       - name: Build with Next.js
         working-directory: ${{ env.FRONTEND_DIR }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

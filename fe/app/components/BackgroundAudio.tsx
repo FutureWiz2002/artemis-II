@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { publicPath } from "../lib/publicPath";
 
 const DEFAULT_VOLUME = 0.2;
 
@@ -49,7 +50,7 @@ export function BackgroundAudio() {
     <div className="audio-control" aria-label="Background music controls">
       <audio
         ref={audioRef}
-        src="/audio/space-ambient.mp3"
+        src={publicPath("/audio/space-ambient.mp3")}
         autoPlay
         loop
         preload="metadata"

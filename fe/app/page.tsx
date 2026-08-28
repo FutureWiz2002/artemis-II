@@ -7,6 +7,7 @@ import { MissionTimeline } from "./components/MissionTimeline";
 import { SpaceScene } from "./components/SpaceScene";
 import { SmoothScroll } from "./components/SmoothScroll";
 import type { ArtemisRouteViewSample } from "./data/artemisRoute";
+import { publicPath } from "./lib/publicPath";
 
 const slides = [
   {
@@ -82,7 +83,7 @@ export default function Home() {
       <nav className="site-nav" aria-label="Primary navigation">
         <a className="nav-brand" href="#top" aria-label="Artemis II home">
           <Image
-            src="/artemis_logo.png"
+            src={publicPath("/artemis_logo.png")}
             alt="Artemis logo"
             width={56}
             height={56}

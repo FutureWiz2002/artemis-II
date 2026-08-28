@@ -13,6 +13,7 @@ import {
 import type { RefObject } from "react";
 import type { Group } from "three";
 import type { ArtemisRouteViewSample } from "../data/artemisRoute";
+import { publicPath } from "../lib/publicPath";
 
 const EARTH_CENTER = [-2.35, -1.65, 2.75] as const;
 const MOON_CENTER = [4.7, 0.95, -5.6] as const;
@@ -69,7 +70,7 @@ function useLowPowerRotation(
 }
 
 function Earth() {
-  const earth = useGLTF("/models/earth.glb");
+  const earth = useGLTF(publicPath("/models/earth.glb"));
   const ref = useRef<Group>(null);
   useLowPowerRotation(ref, 0.035);
 
@@ -85,7 +86,7 @@ function Earth() {
 }
 
 function Moon() {
-  const moon = useGLTF("/models/moon.glb");
+  const moon = useGLTF(publicPath("/models/moon.glb"));
   const ref = useRef<Group>(null);
   useLowPowerRotation(ref, -0.015);
 
@@ -395,5 +396,5 @@ export function SpaceScene({
   );
 }
 
-useGLTF.preload("/models/earth.glb");
-useGLTF.preload("/models/moon.glb");
+useGLTF.preload(publicPath("/models/earth.glb"));
+useGLTF.preload(publicPath("/models/moon.glb"));
